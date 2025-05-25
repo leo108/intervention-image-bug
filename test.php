@@ -10,18 +10,18 @@ if (!is_dir(__DIR__.'/output')) {
 
 $playButtonPath = './play_button.png';
 $previewPath = './original.png';
-$resizedPlayButtonPath = './resized_play_button.png';
+$resizedPlayButtonPath = './resized_play_button.webp';
 
 $round = 20;
 
 for($i=0;$i<$round;$i++) {
-    ImageManager::imagick()->read($playButtonPath)->resize(84, 84)->toPng()->save($resizedPlayButtonPath);
+    ImageManager::imagick()->read($playButtonPath)->resize(84, 84)->toWebp()->save($resizedPlayButtonPath);
 
     $previewRes = ImageManager::imagick()->read($previewPath)->resize(600, 300);
-    $previewRes->toPng()->save("./output/preview_{$i}.png");
+    $previewRes->toWebp()->save("./output/preview_{$i}.webp");
 
     $playButtonRes = ImageManager::imagick()->read($resizedPlayButtonPath);
-    $previewRes->place($playButtonRes, 'center')->toPng()->save("./output/preview_with_play_{$i}.png");
+    $previewRes->place($playButtonRes, 'center')->toWebp()->save("./output/preview_with_play_{$i}.webp");
 
     unlink($resizedPlayButtonPath);
 }
