@@ -1,0 +1,26 @@
+name: PHP Test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      run: docker build -t php-test-image .
+
+    - name: Run PHP test script
+      run: docker run --rm -v ${{ github.workspace }}/output:/app/output php-test-image bash -c "cd /app && php test.php"
+
+    - name: Upload output as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: output-images
+        path: output/
+        retention-days: 30
