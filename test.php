@@ -15,12 +15,12 @@ $resizedPlayButtonPath = './resized_play_button.png';
 $round = 20;
 
 for($i=0;$i<$round;$i++) {
-    ImageManager::imagick()->read($playButtonPath)->resize(84, 84)->toPng()->save($resizedPlayButtonPath);
+    ImageManager::gd()->read($playButtonPath)->resize(84, 84)->toPng()->save($resizedPlayButtonPath);
 
-    $previewRes = ImageManager::imagick()->read($previewPath)->resize(600, 300);
+    $previewRes = ImageManager::gd()->read($previewPath)->resize(600, 300);
     $previewRes->toPng()->save("./output/preview_{$i}.png");
 
-    $playButtonRes = ImageManager::imagick()->read($resizedPlayButtonPath);
+    $playButtonRes = ImageManager::gd()->read($resizedPlayButtonPath);
     $previewRes->place($playButtonRes, 'center')->toPng()->save("./output/preview_with_play_{$i}.png");
 
     unlink($resizedPlayButtonPath);
