@@ -3,7 +3,6 @@ use Intervention\Image\ImageManager;
 
 require __DIR__.'/vendor/autoload.php';
 
-$playButtonPath = './play_button.png';
 $previewPath = './original.png';
 
 $round = 20;
